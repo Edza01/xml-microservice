@@ -28,4 +28,4 @@ node app.js
 Server is running on port 3000
 ```
 
-3) Open a web browser and go to http://localhost:3000/ 
+3) Open a web browser and go to http://localhost:3000/fetch-supplier-data
