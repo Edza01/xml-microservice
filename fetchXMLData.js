@@ -3,7 +3,7 @@ const xml2js = require('xml2js');
 const fs = require('fs');
 
 // Define the URL of your supplier's XML data endpoint
-const supplierXMLUrl = 'http://anda-l.lv/xml/ON-LINE_lv.xml';
+const supplierXMLUrl = '';
 
 async function fetchAndProcessSupplierData() {
     try {
