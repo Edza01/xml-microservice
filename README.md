@@ -16,6 +16,16 @@ npm i
 
 ## Usage
 
-```javascript
-to be continued
+1) Run the following command to start your Express server:
+
+```bash
+node app.js
 ```
+
+2) If everything is set up correctly, you should see the following message in your terminal:
+
+```arduino
+Server is running on port 3000
+```
+
+3) Open a web browser and go to http://localhost:3000/ 
