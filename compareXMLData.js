@@ -1,24 +1,33 @@
- // compare both old and new xmls
+const diff = require('diff');
+const fs = require('fs');
 
-// // Read the existing XML file from xml_old
-// const oldXmlData = fs.readFileSync(path.join(oldXmlDestinationDir, xmlFileName), 'utf8');
+async function compareXML(oldXmlFilePath, newXmlFilePath) {
+  // Check if both files exist
+  if (fs.existsSync(oldXmlFilePath) && fs.existsSync(newXmlFilePath)) {
+    // Read the contents of the old and new XML files
+    const oldXmlContent = fs.readFileSync(oldXmlFilePath, 'utf8');
+    const newXmlContent = fs.readFileSync(newXmlFilePath, 'utf8');
 
-// // Fetch XML data from the supplier
-// const response = await axios.get(supplierXMLUrl);
+    // Perform the comparison
+    const differences = diff.diffLines(oldXmlContent, newXmlContent);
 
-// if (response.status === 200) {
-//   // Compare the new XML data with the existing XML data
-//   const newXmlData = response.data;
-//   const differences = diff.diffChars(oldXmlData, newXmlData);
+    const addedParts = differences.filter(part => part.added);
+    const removedParts = differences.filter(part => part.removed);
 
-//   // Determine if there are differences
-//   if (differences.some(part => part.added || part.removed)) {
-//   console.log(`XML data has changed for URL: ${supplierXMLUrl}`);
-//   }
-// }
+    if (addedParts.length === 0 && removedParts.length === 0) {
+      console.log('No changes found in XML files.'); // Log message when no changes
+    } else {
+      addedParts.forEach(part => {
+        console.log('\x1b[32m' + part.value); // Log added parts in green
+      });
 
-function compareXML(xmlFileName) {
-    
+      removedParts.forEach(part => {
+        console.log('\x1b[31m' + part.value); // Log removed parts in red
+      });
+    }
+  } else {
+    console.log('Both XML files do not exist.');
+  }
 }
 
-module.exports = { compareXML };
+module.exports = compareXML;

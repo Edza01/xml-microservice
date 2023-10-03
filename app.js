@@ -3,7 +3,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 const path = require('path'); // Import the 'path' module for file operations
 const { Pool } = require('pg');
-
 const fetchAndProcessSupplierData = require('./fetchXMLData');
 const compareXML = require('./compareXMLData');
 
@@ -30,11 +29,10 @@ app.get('/fetch-supplier-data', async (req, res) => {
         const oldXmlFilePath = path.join(path.join(__dirname, 'xml_files', 'xml_old'), xmlFileName);
         const newXmlFilePath = path.join(path.join(__dirname, 'xml_files', 'xml_new'), xmlFileName);
 
-        await fetchAndProcessSupplierData(supplierXMLUrl, oldXmlFilePath, newXmlFilePath); // Call the function to fetch and process supplier data
+        // Call the function to fetch and process supplier data
+        await fetchAndProcessSupplierData(supplierXMLUrl, oldXmlFilePath, newXmlFilePath); 
         res.send('Fetching and processing supplier data. Check console for details.');
-
-
-        // await compareXML(xmlFileName);
+        await compareXML(oldXmlFilePath, newXmlFilePath);
       }
     } else {
       console.error('No data was found in the database.');
