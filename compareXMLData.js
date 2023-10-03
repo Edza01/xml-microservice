@@ -17,13 +17,15 @@ async function compareXML(oldXmlFilePath, newXmlFilePath) {
     if (addedParts.length === 0 && removedParts.length === 0) {
       console.log('No changes found in XML files.'); // Log message when no changes
     } else {
-      addedParts.forEach(part => {
-        console.log('\x1b[32m' + part.value); // Log added parts in green
-      });
+    //   addedParts.forEach(part => {
+    //     console.log('\x1b[32m' + part.value); // Log added parts in green
+    //   });
 
-      removedParts.forEach(part => {
-        console.log('\x1b[31m' + part.value); // Log removed parts in red
-      });
+    //   removedParts.forEach(part => {
+    //     console.log('\x1b[31m' + part.value); // Log removed parts in red
+    //   });
+      
+      return true;
     }
   } else {
     console.log('Both XML files do not exist.');
